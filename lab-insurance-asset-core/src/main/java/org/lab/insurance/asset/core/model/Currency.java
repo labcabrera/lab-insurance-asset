@@ -22,7 +22,7 @@ public class Currency {
 	@Id
 	private String id;
 
-	private String iso;
+	private String iso3;
 
 	private String name;
 

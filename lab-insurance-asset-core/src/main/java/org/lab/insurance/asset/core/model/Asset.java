@@ -3,6 +3,7 @@ package org.lab.insurance.asset.core.model;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -36,6 +37,7 @@ public class Asset {
 
 	private Date toDate;
 
+	@DBRef
 	private Currency currency;
 
 	public Asset(String isin) {
