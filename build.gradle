@@ -3,8 +3,8 @@ buildscript {
     springBootVersion         = '2.0.3.RELEASE'
     springfoxSwaggerVersion   = '2.8.0'
 
-    mvnProxy = "$System.env.MVN_PROXY"
-    //mvnProxy = "http://nexus:8080/nexus/content/groups/public/"
+    //mvnProxy = "$System.env.MVN_PROXY"
+    mvnProxy = "http://nexus:8080/nexus/content/groups/public/"
   }
   repositories {
     if(mvnProxy != null) {
@@ -45,15 +45,16 @@ subprojects {
 
 project(":lab-insurance-asset-core") {
   dependencies {  
-    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-    compile('org.projectlombok:lombok')
+    compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-csv"
+    compile 'org.projectlombok:lombok'
   }
 }
 
 project(":lab-insurance-asset-api") {
   dependencies {
     compile project(":lab-insurance-asset-core")
-    compile('org.springframework.boot:spring-boot-starter-web')
+    compile "org.springframework.boot:spring-boot-starter-web"
     compile "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
     compile "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
   }

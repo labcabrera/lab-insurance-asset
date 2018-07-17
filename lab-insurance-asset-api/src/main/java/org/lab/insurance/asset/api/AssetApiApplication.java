@@ -1,18 +1,26 @@
 package org.lab.insurance.asset.api;
 
+import org.lab.insurance.asset.core.populator.AssetModulePopulator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@EnableSwagger2
-@EnableMongoRepositories("org.lab.insurance.asset.core.repository")
-public class AssetApiApplication {
+public class AssetApiApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AssetApiApplication.class, args);
+	}
+
+	@Autowired
+	private AssetModulePopulator populator;
+
+	@Override
+	public void run(String... args) throws Exception {
+		if (!populator.isInitialized()) {
+			populator.initialize();
+		}
 	}
 
 }

@@ -12,13 +12,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Document
+@Document(collection = "assets")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Asset {
+
+	public enum AssetType {
+		FIM, GUARANTEE, INTERNAL_FUND, CASH;
+	}
 
 	@Id
 	private String id;
@@ -43,4 +47,5 @@ public class Asset {
 	public Asset(String isin) {
 		this.isin = isin;
 	}
+
 }
