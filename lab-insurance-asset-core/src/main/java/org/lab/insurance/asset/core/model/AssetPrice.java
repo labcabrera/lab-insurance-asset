@@ -27,17 +27,17 @@ public class AssetPrice {
 	@Id
 	private String id;
 
-	@DBRef
+	@DBRef(lazy = true)
 	@JsonSerialize(using = HasIdSerializer.class)
 	private Asset asset;
 
-	@DBRef
+	@DBRef(lazy = true)
 	@JsonSerialize(using = HasIdSerializer.class)
 	private Currency currency;
 
-	private LocalDateTime priceDateFrom;
+	private LocalDateTime from;
 
-	private LocalDateTime priceDateTo;
+	private LocalDateTime to;
 
 	private LocalDateTime generated;
 

@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 
 import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
@@ -36,9 +38,6 @@ public class AssetModulePopulator {
 	private AssetPriceRepository assetPriceRepository;
 
 	public boolean isInitialized() {
-		// TODO
-		assetRepository.deleteAll();
-
 		return assetRepository.count() > 0;
 	}
 
@@ -53,8 +52,11 @@ public class AssetModulePopulator {
 		LocalDateTime from = LocalDateTime.parse("2010-01-01T05:06:07.150Z", DateTimeFormatter.ISO_DATE_TIME);
 		LocalDateTime to = LocalDateTime.parse("2018-12-31T00:00:00.000Z", DateTimeFormatter.ISO_DATE_TIME);
 
-		Asset asset = assetRepository.findById("ASSET01").get();
-		populateMockPrices(asset, from, to, new BigDecimal("1000"), new BigDecimal("0.1"));
+		populateMockPrices(assetRepository.findById("ASSET01").get(), from, to, new BigDecimal("500"),
+			new BigDecimal("0.05"));
+
+		populateMockPrices(assetRepository.findById("ASSET02").get(), from, to, new BigDecimal("100"),
+			new BigDecimal("0.01"));
 
 	}
 
@@ -62,8 +64,11 @@ public class AssetModulePopulator {
 		try {
 			CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader();
 			CsvMapper mapper = new CsvMapper();
+			mapper.findAndRegisterModules();
+			mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false); // Optiona
 			File file = new ClassPathResource(fileName).getFile();
-			MappingIterator<T> readValues = mapper.readerFor(type).with(bootstrapSchema).readValues(file);
+			ObjectReader objectReader = mapper.readerFor(type).with(bootstrapSchema);
+			MappingIterator<T> readValues = objectReader.readValues(file);
 			return readValues.readAll();
 		}
 		catch (Exception ex) {
@@ -86,11 +91,11 @@ public class AssetModulePopulator {
 			price.setPrice(tmpPrice);
 			price.setSellPrice(tmpPrice);
 			price.setBuyPrice(tmpPrice);
-			price.setPriceDateFrom(tmpDateFrom);
-			price.setPriceDateTo(tmpDateTo);
+			price.setFrom(tmpDateFrom);
+			price.setTo(tmpDateTo);
 			price.setCurrency(new Currency("EUR"));
 			price.setGenerated(now);
-			tmpDateFrom = tmpDateFrom.plusDays(1);
+			tmpDateFrom = tmpDateFrom.plusDays(1).with(LocalTime.MIN);
 			tmpPrice = tmpPrice.add(inc);
 			prices.add(price);
 		}
