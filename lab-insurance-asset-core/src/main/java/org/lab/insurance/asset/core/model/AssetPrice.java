@@ -27,7 +27,9 @@ public class AssetPrice {
 
 	private Currency currency;
 
-	private Date priceDate;
+	private Date priceDateFrom;
+
+	private Date priceDateTo;
 
 	private BigDecimal price;
 

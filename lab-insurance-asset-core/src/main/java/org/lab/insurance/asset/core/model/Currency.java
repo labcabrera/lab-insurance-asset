@@ -1,5 +1,6 @@
 package org.lab.insurance.asset.core.model;
 
+import org.lab.insurance.asset.core.common.HasId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
@@ -18,7 +19,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Currency {
+public class Currency implements HasId<String> {
 
 	@Id
 	private String id;

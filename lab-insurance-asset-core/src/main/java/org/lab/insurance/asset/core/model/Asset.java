@@ -2,9 +2,12 @@ package org.lab.insurance.asset.core.model;
 
 import java.util.Date;
 
+import org.lab.insurance.asset.core.common.IdSerializer;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +45,7 @@ public class Asset {
 	private Date toDate;
 
 	@DBRef
+	@JsonSerialize(using = IdSerializer.class)
 	private Currency currency;
 
 	/**
