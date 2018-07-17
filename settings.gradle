@@ -1,0 +1,2 @@
+include ":lab-insurance-asset-core",
+        ":lab-insurance-asset-api"

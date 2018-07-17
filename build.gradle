@@ -1,0 +1,61 @@
+buildscript {
+  ext {
+    springBootVersion         = '2.0.3.RELEASE'
+    springfoxSwaggerVersion   = '2.8.0'
+
+    mvnProxy = "$System.env.MVN_PROXY"
+    //mvnProxy = "http://nexus:8080/nexus/content/groups/public/"
+  }
+  repositories {
+    if(mvnProxy != null) {
+      mavenLocal()
+      maven { url mvnProxy }
+    } else {
+      print "Using maven central"
+      mavenCentral()
+      maven { url "http://repo.spring.io/plugins-release/" }
+    }
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
+}
+
+subprojects {
+
+  apply plugin: 'java'
+  apply plugin: 'eclipse'
+  apply plugin: 'org.springframework.boot'
+  apply plugin: 'io.spring.dependency-management'
+
+  group = 'org.lab.insurance.asset'
+  version = version
+  sourceCompatibility = 1.8
+
+  repositories {
+    if(mvnProxy != null) {
+      mavenLocal()
+      maven { url mvnProxy }
+    } else {
+      mavenCentral()
+      maven { url "http://repo.spring.io/plugins-release/" }
+    }
+  }
+}
+
+project(":lab-insurance-asset-core") {
+  dependencies {  
+    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+    compile('org.projectlombok:lombok')
+  }
+}
+
+project(":lab-insurance-asset-api") {
+  dependencies {
+    compile project(":lab-insurance-asset-core")
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
+    compile "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
+  }
+}
+

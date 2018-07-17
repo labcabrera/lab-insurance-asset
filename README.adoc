@@ -1,0 +1,5 @@
+= Asset module - Open Asset Management System
+
+== Introduction
+
+Asset module for https://github.com/labcabrera/lab-insurance[lab-insurance] project.
