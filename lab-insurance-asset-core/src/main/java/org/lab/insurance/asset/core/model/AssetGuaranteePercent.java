@@ -31,4 +31,13 @@ public class AssetGuaranteePercent {
 	private Date to;
 	private BigDecimal guaranteePercent;
 
+	/**
+	 * Public constructor using entity identifier.
+	 * 
+	 * @param id
+	 */
+	public AssetGuaranteePercent(String id) {
+		this.id = id;
+	}
+
 }

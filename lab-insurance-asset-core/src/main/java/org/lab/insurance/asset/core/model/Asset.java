@@ -44,8 +44,13 @@ public class Asset {
 	@DBRef
 	private Currency currency;
 
-	public Asset(String isin) {
-		this.isin = isin;
+	/**
+	 * Public constructor using entity identifier.
+	 * 
+	 * @param id
+	 */
+	public Asset(String id) {
+		this.id = id;
 	}
 
 }
