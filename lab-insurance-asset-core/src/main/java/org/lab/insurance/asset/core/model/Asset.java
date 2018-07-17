@@ -1,8 +1,9 @@
 package org.lab.insurance.asset.core.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
-import org.lab.insurance.asset.core.common.IdSerializer;
+import org.lab.insurance.asset.core.common.HasId;
+import org.lab.insurance.asset.core.common.HasIdSerializer;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Asset {
+public class Asset implements HasId<String> {
 
 	public enum AssetType {
 		FIM, GUARANTEE, INTERNAL_FUND, CASH;
@@ -40,12 +41,12 @@ public class Asset {
 
 	private Integer decimals;
 
-	private Date fromDate;
+	private LocalDateTime fromDate;
 
-	private Date toDate;
+	private LocalDateTime toDate;
 
 	@DBRef
-	@JsonSerialize(using = IdSerializer.class)
+	@JsonSerialize(using = HasIdSerializer.class)
 	private Currency currency;
 
 	/**

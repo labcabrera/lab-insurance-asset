@@ -7,7 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-public class IdSerializer extends JsonSerializer<HasId<?>> {
+public class HasIdSerializer extends JsonSerializer<HasId<?>> {
 
 	@Override
 	public void serialize(HasId<?> entity, JsonGenerator jsonGenerator, SerializerProvider provider)

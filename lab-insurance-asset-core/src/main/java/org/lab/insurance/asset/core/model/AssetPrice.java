@@ -1,10 +1,14 @@
 package org.lab.insurance.asset.core.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
+import org.lab.insurance.asset.core.common.HasIdSerializer;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,20 +27,24 @@ public class AssetPrice {
 	@Id
 	private String id;
 
+	@DBRef
+	@JsonSerialize(using = HasIdSerializer.class)
 	private Asset asset;
 
+	@DBRef
+	@JsonSerialize(using = HasIdSerializer.class)
 	private Currency currency;
 
-	private Date priceDateFrom;
+	private LocalDateTime priceDateFrom;
 
-	private Date priceDateTo;
+	private LocalDateTime priceDateTo;
+
+	private LocalDateTime generated;
 
 	private BigDecimal price;
 
 	private BigDecimal buyPrice;
 
 	private BigDecimal sellPrice;
-
-	private Date generated;
 
 }

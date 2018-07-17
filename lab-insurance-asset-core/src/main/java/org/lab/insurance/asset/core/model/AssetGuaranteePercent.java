@@ -1,7 +1,7 @@
 package org.lab.insurance.asset.core.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -27,8 +27,10 @@ public class AssetGuaranteePercent {
 	@DBRef
 	private Asset asset;
 
-	private Date from;
-	private Date to;
+	private LocalDateTime from;
+
+	private LocalDateTime to;
+
 	private BigDecimal guaranteePercent;
 
 	/**
