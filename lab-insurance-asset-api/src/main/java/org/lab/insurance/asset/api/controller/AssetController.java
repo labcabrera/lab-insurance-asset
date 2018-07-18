@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,14 +25,13 @@ public class AssetController {
 	@Autowired
 	private AssetRepository repository;
 
-	// TODO filter predicate
 	@GetMapping
 	public Page<Asset> search( //@formatter:off
 			@RequestParam(name = "p", defaultValue = "0") Integer page,
 			@RequestParam(name = "s", defaultValue = "10") Integer size) { //@formatter:on
-		Pageable pageable = PageRequest.of(page, size);
 		Example<Asset> example = Example.of(new Asset());
-		return repository.findAll(example, pageable);
+		// TODO filter predicates
+		return repository.findAll(example, PageRequest.of(page, size));
 	}
 
 	@GetMapping("/{id}")

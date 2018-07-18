@@ -15,9 +15,9 @@ import lombok.ToString;
 @Document(collection = "currencies")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Builder
 public class Currency implements HasId<String> {
 
