@@ -1,4 +1,4 @@
-package org.lab.insurance.asset.core.populator;
+package org.lab.insurance.asset.common.service;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -6,16 +6,17 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lab.insurance.asset.common.InsuranceCommonConfiguration;
 import org.lab.insurance.asset.common.exception.MissingPrice;
 import org.lab.insurance.asset.common.model.AssetPrice;
-import org.lab.insurance.asset.common.service.AssetPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+@Ignore("mongodb required")
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = InsuranceCommonConfiguration.class)
 public class AssetPriceServiceTest {
