@@ -4,12 +4,13 @@ buildscript {
     springfoxSwaggerVersion   = '2.8.0'
   }
   repositories {
-    mavenCentral()
+    //mavenCentral()
+    maven { url "http://nexus:8080/nexus/content/groups/public/" }
     maven { url "https://plugins.gradle.org/m2/" }
   }
   dependencies {
     classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    classpath("gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.19.2")
+    //classpath("gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.19.2")
   }
 }
 
@@ -25,23 +26,44 @@ subprojects {
   sourceCompatibility = 1.8
 
   repositories {
-    mavenCentral()
+    //mavenCentral()
+    maven { url "http://nexus:8080/nexus/content/groups/public/" }
   }
 }
 
-project(":lab-insurance-asset-core") {
-  dependencies {  
+project(":lab-insurance-asset-common") {
+
+  dependencies {
     compile "org.springframework.boot:spring-boot-starter-data-mongodb"
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-csv"
     compile "org.projectlombok:lombok"
     testCompile "org.springframework.boot:spring-boot-starter-test"
-    testCompile "junit:junit"
+  }
+  
+  jar {
+    enabled = true
+  }
+  
+  bootJar {
+	classifier = 'boot'
+	// workaround to create a simple java library instead of a spring boot jar
+	mainClassName = 'org.lab.insurance.asset.core.Dummy'
+  }
+
+  
+}
+
+project(":lab-insurance-asset-core") {
+
+  dependencies {
+    compile project(":lab-insurance-asset-common")
+    //testCompile "junit:junit"
   }
 }
 
 project(":lab-insurance-asset-api") {
 
-  apply plugin: 'com.palantir.docker'
+  //apply plugin: 'com.palantir.docker'
 
   dependencies {
     compile project(":lab-insurance-asset-core")
@@ -50,11 +72,13 @@ project(":lab-insurance-asset-api") {
     compile "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
   }
   
+  /*
   docker {
     name "labcabrera/${jar.baseName}"
     tags 'latest'
     files jar.archivePath
     buildArgs(['JAR_FILE': "${jar.archiveName}"])
   }
+  */
 }
 

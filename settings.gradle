@@ -1,2 +1,3 @@
-include ":lab-insurance-asset-core",
+include ":lab-insurance-asset-common",
+        ":lab-insurance-asset-core",
         ":lab-insurance-asset-api"

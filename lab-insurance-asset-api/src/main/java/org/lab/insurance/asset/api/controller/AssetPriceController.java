@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import org.lab.insurance.asset.core.model.AssetPrice;
-import org.lab.insurance.asset.core.service.AssetPriceService;
+import org.lab.insurance.asset.common.model.AssetPrice;
+import org.lab.insurance.asset.common.service.AssetPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package org.lab.insurance.asset.api.controller;
 
-import org.lab.insurance.asset.core.model.Asset;
-import org.lab.insurance.asset.core.repository.AssetRepository;
+import org.lab.insurance.asset.common.model.Asset;
+import org.lab.insurance.asset.common.repository.AssetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;

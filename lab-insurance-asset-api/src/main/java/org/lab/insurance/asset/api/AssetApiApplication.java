@@ -1,6 +1,6 @@
 package org.lab.insurance.asset.api;
 
-import org.lab.insurance.asset.core.populator.AssetModulePopulator;
+import org.lab.insurance.asset.common.populator.AssetModulePopulator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

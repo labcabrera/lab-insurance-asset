@@ -1,7 +1,7 @@
 package org.lab.insurance.asset.api.controller;
 
-import org.lab.insurance.asset.core.model.Currency;
-import org.lab.insurance.asset.core.repository.CurrencyRepository;
+import org.lab.insurance.asset.common.model.Currency;
+import org.lab.insurance.asset.common.repository.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -26,9 +26,8 @@ public class CurrencyController {
 	private CurrencyRepository repository;
 
 	@GetMapping
-	public Page<Currency> search( //@formatter:off
-			@RequestParam(name = "p", defaultValue = "0") Integer page,
-			@RequestParam(name = "s", defaultValue = "10") Integer size) { //@formatter:on
+	public Page<Currency> search(@RequestParam(name = "p", defaultValue = "0") Integer page,
+		@RequestParam(name = "s", defaultValue = "10") Integer size) {
 		return repository.findAll(Example.of(new Currency()), PageRequest.of(page, size));
 	}
 
