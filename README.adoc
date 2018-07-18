@@ -1,7 +1,16 @@
 = Asset module - Open Asset Management System
 
+:linkLabInsurance: https://github.com/labcabrera/lab-insurance
+
+
 image:https://travis-ci.org/labcabrera/lab-insurance-asset.svg?branch=master["Build Status", link="https://travis-ci.org/labcabrera/lab-insurance-asset"]
+image:https://api.codacy.com/project/badge/Grade/c6158fc8c76e4155baf6f2b3ab1c3992["Codacy code quality", link="https://www.codacy.com/app/lab.cabrera/lab-insurance-asset?utm_source=github.com&utm_medium=referral&utm_content=labcabrera/lab-insurance-asset&utm_campaign=Badge_Grade"]
 
 == Introduction
 
-Asset module for https://github.com/labcabrera/lab-insurance[lab-insurance] project.
+Módulo de activos financieros del proyecto {linkLabInsurance}[lab-insurance] project.
+
+Está compuesto de dos microservicios:
+
+* *lab-insurance-asset-api*: API REST con las operaciones básicas (búsqueda de activos, monedas, precios, etc).
+* *lab-insurance-asset-core*: componentes de integración utilizando RabbitMQ.
