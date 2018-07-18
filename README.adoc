@@ -1,5 +1,7 @@
 = Asset module - Open Asset Management System
 
+image:https://travis-ci.org/labcabrera/lab-insurance-asset.svg?branch=master["Build Status", link="https://travis-ci.org/labcabrera/lab-insurance-asset"]
+
 == Introduction
 
 Asset module for https://github.com/labcabrera/lab-insurance[lab-insurance] project.
